@@ -1,28 +1,20 @@
-module ApplicationDebugger 
+# frozen_string_literal: true
 
-  def debug(args) 
+module ApplicationDebugger
+  def debug(args)
+    puts "Application debug start: #{args.inspect}"
+    result = super # calls the debug method defined above it in the heirarchy
+    puts "Application debug finished: #{result}"
+  end
+end
+class Application
+  prepend ApplicationDebugger
 
-    puts "Application debug start: #{args.inspect}" 
+  def debug(_args)
+    { result: 'ok' }
+  end
+end
 
-    result = super 
-
-    puts "Application debug finished: #{result}"  
-
-  end 
-
-end 
-class Application 
-
-  prepend ApplicationDebugger 
-
-  def debug(args) 
-
-    {result: "ok"} 
-
-  end 
-
-end 
-DBugger = Application.new 
-
-DBugger.debug("NotePad") 
-
+Application.ancestors # [ApplicationDebugger, Application, Object, Kernel, BasicObject]
+DBugger = Application.new
+DBugger.debug('NotePad')

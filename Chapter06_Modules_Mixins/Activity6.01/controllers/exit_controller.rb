@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ExitController < Controller
   def run
-    log "Exiting..."
+    log 'Exiting...'
   end
 end

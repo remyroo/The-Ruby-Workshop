@@ -1,3 +1,5 @@
-ENV['TEST'] = "true"
+# frozen_string_literal: true
+
+ENV['TEST'] = 'true'
 require './application'
-Dir["./tests/*rb"].each { |f| require f }
+Dir['./tests/*rb'].sort.each { |f| require f }

@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 module Address
-  attr_accessor :address_line1, :address_line2, :city, :state, :postal_code, :country 
+  attr_accessor :address_line1, :address_line2, :city, :state, :postal_code, :country
 
   def region
-    return nil if country.nil? || country == ""
+    return nil if country.nil? || country == ''
+
     case country
-    when "United States", "Canada", "Mexico"
-        "North America"
+    when 'United States', 'Canada', 'Mexico'
+      'North America'
     else
-        "Global"
+      'Global'
     end
   end
 end
@@ -24,10 +27,9 @@ class Employee < User
   attr_accessor :department
   def region
     if department
-        department.region || super
+      department.region || super
     else
-        super
+      super
     end
   end
 end
-

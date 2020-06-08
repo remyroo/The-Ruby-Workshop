@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class VotingMachine
   attr_reader :month, :year, :results, :categories
 
-  class InvalidCategory < Exception; end
-  class InvalidVote < Exception; end
+  class InvalidCategory < RuntimeError; end
+  class InvalidVote < RuntimeError; end
 
   def initialize(month, year)
     @month = month
@@ -19,21 +21,24 @@ class VotingMachine
   def record_vote(category, voter, votee)
     raise InvalidCategory unless valid_category?(category)
     raise InvalidVote unless valid_vote?(voter, votee)
+
     results[category] ||= {}
     results[category][votee] ||= 0
     results[category][votee] += 1
   end
 
   def sorted_results
-    results.map{|k, v| {k => v.sort_by(&:last).reverse}}
+    results.map { |k, v| { k => v.sort_by(&:last).reverse } }
   end
 
   private
+
   def valid_vote?(voter, votee)
     # For now, the only logic is that you can't vote for yourself
     # However, this method allows future logic such as not allowing
     # multiple votes
-    return false if [voter, votee].any?{|v| v.nil? || v == ""}
+    return false if [voter, votee].any? { |v| v.nil? || v == '' }
+
     voter.to_s.downcase != votee.downcase.to_s
   end
 

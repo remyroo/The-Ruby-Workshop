@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module ControllerLogger
   # If you aren't using a framework that gives you logging
-  # out of the box, its usually a good idea to implement a 
+  # out of the box, its usually a good idea to implement a
   # centralized logging method at the base class so you get
   # consistent logging and do things like avoid logging output
   # during tests
@@ -21,7 +23,7 @@ module ControllerLogger
     log "Starting #{self.class}" if ENV['DEBUG']
     return_val = super
     log "Completed running #{self.class}" if ENV['DEBUG']
-    return return_val
+    return_val
   end
 end
 

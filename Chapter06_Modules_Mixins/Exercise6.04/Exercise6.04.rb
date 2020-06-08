@@ -35,7 +35,6 @@ pt = PaymentTypes1.new(1, :wire, 'Wire')
 pt.id
 pt.name
 pt.label
-pt = PaymentTypes1.new(nil, :foo, 'Huh?')
 
 # step 2: add an "all" class method that loops over the DATA constants
 # instantiates each one and assigns it to a class instance variable "@all"

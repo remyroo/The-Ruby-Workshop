@@ -1,26 +1,28 @@
-module PrependedModule
+# frozen_string_literal: true
 
- def output
-  puts "Outputting from the PrependedModule"
-  super
- end
+module PrependedModule
+  def output
+    puts 'Outputting from the PrependedModule'
+    super
+  end
 end
 
 class ParentClass
- prepend PrependedModule
+  prepend PrependedModule
 
- def self.inherited(klass)
-  klass.send(:prepend, PrependedModule)
- end
+  def self.inherited(klass)
+    klass.send(:prepend, PrependedModule)
+  end
 
- def output
-  puts "Outputting from the parent class"
- end
+  def output
+    puts 'Outputting from the parent class'
+  end
 end
 
 class ChildClass < ParentClass
- def output
-  puts "Outputting from the child class"
- end
+  def output
+    puts 'Outputting from the child class'
+  end
 end
+
 puts ChildClass.new.output
